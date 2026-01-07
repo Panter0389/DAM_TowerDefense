@@ -51,6 +51,27 @@ public class EnemySpawner : MonoBehaviour
     {
         spawnRateTime = waveDatas[currentWaveIndex].GetSpawnRateTime();
         spawnRateTimer = 0;
+        enemiesWaveSpawned = 0;
+    }
+
+    public void OnEnemyDie(BaseEnemy deathEnemy)
+    {
+        if (spawnedEnemies.Contains(deathEnemy))
+        {
+            spawnedEnemies.Remove(deathEnemy);
+        }
+        //Debug.Log("NEMICI RIMASTI:" + spawnedEnemies.Count);
+        if (spawnedEnemies.Count <= 0)
+        {
+            waveWaitTimer = 0;
+            currentWaveIndex++;
+            if (currentWaveIndex < waveDatas.Count)
+            {
+                isWaitingNextWave = true;
+            }
+           
+            
+        }
     }
 
 }

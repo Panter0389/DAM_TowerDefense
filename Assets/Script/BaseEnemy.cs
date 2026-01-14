@@ -2,14 +2,19 @@ using UnityEngine;
 
 public class BaseEnemy : MonoBehaviour
 {
-
-    public Rigidbody2D rigidbody2D;
-    public Animator animator;
-    public SpriteRenderer spriteRenderer;
+    [Header("Settings")]
     public float speed = 20f;
     public int playerHitDamage = 1;
     public bool isSideSpriteFacingRight;
     public int maxHP = 2;
+    public int moneyReward = 2;
+
+    [Header("Components")]
+    public Rigidbody2D rigidbody2D;
+    public Animator animator;
+    public SpriteRenderer spriteRenderer;
+    public Collider2D enemyCollider;
+
     int currentHp = 2;
     bool active = true;
     bool isDead = false;
@@ -90,8 +95,15 @@ public class BaseEnemy : MonoBehaviour
         spriteRenderer.color = Color.red;
         Invoke("ResetColor", 0.1f);
 
-        if (currentHp <= 0)
+        if (currentHp <= 0 && !isDead)
         {
+            isDead = true;
+            enemyCollider.enabled = false;
+            PlayerManager playerManager = FindFirstObjectByType<PlayerManager>();
+            if(playerManager != null)
+            {
+                playerManager.GainMoney(moneyReward);
+            }
             DestroyMe();
         }
     }
@@ -112,7 +124,6 @@ public class BaseEnemy : MonoBehaviour
             enemySpawner.OnEnemyDie(this);
         }
         active = false;
-        isDead = true;
         rigidbody2D.linearVelocity = Vector2.zero;
 
         animator.SetBool("Dead", isDead);

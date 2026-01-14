@@ -52,7 +52,7 @@ public class TowerBase : MonoBehaviour
             target.Hit(damage);
         }
 
-        Debug.Log("BANG!");
+        //Debug.Log("BANG!");
     }
 
 

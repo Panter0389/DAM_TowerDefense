@@ -7,6 +7,7 @@ public class TowerBase : MonoBehaviour
     public float range = 1.5f;
     public int damage = 1;
     public float shootRate = 1;
+    public int cost = 5;
 
     float shootTimer = 1;
 
@@ -33,26 +34,9 @@ public class TowerBase : MonoBehaviour
 
     }
 
-    public void Shoot()
+    public virtual void Shoot()
     {
-        List<BaseEnemy> enemiesInView = trigger.GetEnemiesInView();
-
-        int biggerPathIndex = -1;
-        BaseEnemy target = null;
-        foreach(BaseEnemy enemy in enemiesInView)
-        {
-            if(enemy.TargetPathIndex > biggerPathIndex)
-            {
-                biggerPathIndex = enemy.TargetPathIndex;
-                target = enemy;
-            }
-        }
-        if (target != null)
-        {
-            target.Hit(damage);
-        }
-
-        //Debug.Log("BANG!");
+       // IMPLEMENTATO DAI FIGLI
     }
 
 

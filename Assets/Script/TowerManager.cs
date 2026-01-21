@@ -60,7 +60,7 @@ public class TowerManager : MonoBehaviour
         {
             if(isBuildingTower && !currentHoverCell.HasTower)
             {
-                if(playerManager.SpendMoney(5))
+                if(playerManager.SpendMoney(towerToBuild.cost))
                 {
                     Vector3 pos = currentHoverCell.transform.position;
                     TowerBase newTower = Instantiate(towerToBuild, pos, Quaternion.identity, currentHoverCell.transform);

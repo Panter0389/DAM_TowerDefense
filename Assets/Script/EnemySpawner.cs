@@ -16,6 +16,7 @@ public class EnemySpawner : MonoBehaviour
     float spawnRateTime = 10f;
     float spawnRateTimer = 0;
 
+
     public void Update()
     {
         if (isWaitingNextWave)
@@ -61,7 +62,8 @@ public class EnemySpawner : MonoBehaviour
             spawnedEnemies.Remove(deathEnemy);
         }
         //Debug.Log("NEMICI RIMASTI:" + spawnedEnemies.Count);
-        if (spawnedEnemies.Count <= 0)
+        bool allWaveSpawed = enemiesWaveSpawned >= waveDatas[currentWaveIndex].enemiesAmount;
+        if (allWaveSpawed && spawnedEnemies.Count <= 0)
         {
             waveWaitTimer = 0;
             currentWaveIndex++;

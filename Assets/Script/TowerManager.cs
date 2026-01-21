@@ -12,7 +12,8 @@ public class TowerManager : MonoBehaviour
     public PlayerManager playerManager;
 
     [Header("Prefabs")]
-    public TowerBase towerToBuild;
+    public ArchersTower archerTower;
+    public CannonTower cannonTower;
 
     Cell currentHoverCell;
 
@@ -60,7 +61,8 @@ public class TowerManager : MonoBehaviour
         {
             if(isBuildingTower && !currentHoverCell.HasTower)
             {
-                if(playerManager.SpendMoney(towerToBuild.cost))
+                TowerBase towerToBuild = GetTowerToBuild();
+                if (playerManager.SpendMoney(towerToBuild.cost))
                 {
                     Vector3 pos = currentHoverCell.transform.position;
                     TowerBase newTower = Instantiate(towerToBuild, pos, Quaternion.identity, currentHoverCell.transform);
@@ -71,6 +73,23 @@ public class TowerManager : MonoBehaviour
                     towerPreview.PulseRed();
                 }
             }
+        }
+    }
+
+    TowerBase GetTowerToBuild()
+    {
+        if (buildTowerIndex == 0)
+        {
+           return archerTower;
+        }
+        else if (buildTowerIndex == 1)
+        {
+            return cannonTower;
+        }
+        else
+        {
+            Debug.LogError("LA TORRE CHE VUOI COSTRUIRE NON ESISTE!!");
+            return archerTower;
         }
     }
 
@@ -96,6 +115,8 @@ public class TowerManager : MonoBehaviour
         {
             isBuildingTower = true;
             buildTowerIndex = towerIndex;
+            TowerBase towerToBuild = GetTowerToBuild();
+            towerPreview.SetPreview(towerToBuild.GetTowerSprite() ,towerToBuild.range * 2);
         }
     }
 }

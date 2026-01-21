@@ -13,6 +13,13 @@ public class TowerPreview : MonoBehaviour
         startingRangeColor = rangeRenderer.color;
         startingTowerColor = towerRenderer.color;
     }
+
+    public void SetPreview(Sprite towerSprite, float rangeScale)
+    {
+        towerRenderer.sprite = towerSprite;
+        rangeRenderer.transform.localScale = new Vector3(rangeScale, rangeScale, 1);
+    }
+
     public void PulseRed()
     {
         rangeRenderer.color = Color.red;

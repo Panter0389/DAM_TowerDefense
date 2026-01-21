@@ -23,13 +23,13 @@ public class BaseEnemy : MonoBehaviour
     int targetPathIndex = 0;
     public int TargetPathIndex => targetPathIndex;
 
-    private void Awake()
+    public virtual void Awake()
     {
         levelManager = FindFirstObjectByType<LevelManager>();
         currentHp = maxHP;
     }
 
-    public void Update()
+    public virtual void Update()
     {
         if (!active)
         {
@@ -37,7 +37,7 @@ public class BaseEnemy : MonoBehaviour
         }
 
         Vector3 targetPosition = levelManager.pathPoints[targetPathIndex].position;
-        if (Vector3.Distance(transform.position, targetPosition) < 0.05f)
+        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {
             if (targetPathIndex + 1 < levelManager.pathPoints.Count)
             {
@@ -89,7 +89,7 @@ public class BaseEnemy : MonoBehaviour
         DestroyMe();
     }
 
-    public void Hit(int damage)
+    public virtual void Hit(int damage)
     {
         currentHp -= damage;
         spriteRenderer.color = Color.red;

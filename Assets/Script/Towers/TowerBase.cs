@@ -39,5 +39,11 @@ public class TowerBase : MonoBehaviour
        // IMPLEMENTATO DAI FIGLI
     }
 
+    public Sprite GetTowerSprite()
+    {
+        return towerSpriteRenderer.sprite;
+    }
+
+
 
 }

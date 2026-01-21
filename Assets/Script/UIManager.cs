@@ -1,3 +1,5 @@
+
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +9,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI playerHPText;
     public TextMeshProUGUI moneyText;
 
-    public TowerButton tower1button;
+    public List<TowerButton> towerButtons = new List<TowerButton>();
 
     public void UpdatePlayerHP(int playerHP)
     {
@@ -18,14 +20,19 @@ public class UIManager : MonoBehaviour
     {
         moneyText.text = money.ToString();
 
-        if(money >= tower1button.towerBase.cost)
+        foreach (TowerButton tb in towerButtons)
         {
-            tower1button.SetInteractable(true);
+            if (money >= tb.towerBase.cost)
+            {
+                tb.SetInteractable(true);
+            }
+            else
+            {
+                tb.SetInteractable(false);
+            }
         }
-        else
-        {
-            tower1button.SetInteractable(false);
-        }
+
+        
 
     }
 

@@ -7,9 +7,9 @@ public class CannonTower : TowerBase
     {
         List<BaseEnemy> enemiesInView = trigger.GetEnemiesInView();
 
-        foreach (BaseEnemy enemy in enemiesInView)
+        for (int i = enemiesInView.Count -1; i>=0; i-- )
         {
-            enemy.Hit(damage);
+            enemiesInView[i].Hit(damage);
         }
     }
 }
